@@ -1,0 +1,75 @@
+[submodule "YouCompleteMe"]
+	path = vim/bundle/YouCompleteMe
+  url = https://github.com/Valloric/YouCompleteMe
+[submodule "nerdcommenter"]
+  path = vim/bundle/nerdcommenter
+  url = https://github.com/scrooloose/nerdcommenter
+[submodule "nerdtree"]
+  path = vim/bundle/nerdtree
+  url = https://github.com/scrooloose/nerdtree
+[submodule "nerdtree-git-plugin"]
+  path = vim/bundle/nerdtree-git-plugin
+  url = https://github.com/Xuyuanp/nerdtree-git-plugin
+[submodule "node"]
+  path = vim/bundle/node
+  url = https://github.com/moll/vim-node
+[submodule "pathogen"]
+  path = vim/bundle/pathogen
+  url = https://github.com/tpope/vim-pathogen
+[submodule "tagbar"]
+  path = vim/bundle/tagbar
+  url = https://github.com/majutsushi/tagbar
+[submodule "tern_for_vim"]
+  path = vim/bundle/tern_for_vim
+  url = https://github.com/ternjs/tern_for_vim
+[submodule "vim-airline"]
+  path = vim/bundle/vim-airline
+  url = https://github.com/vim-airline/vim-airline
+[submodule "vim-commentary"]
+  path = vim/bundle/vim-commentary
+  url = https://github.com/tpope/vim-commentary
+[submodule "vim-gitgutter"]
+  path = vim/bundle/vim-gitgutter  
+  url = https://github.com/airblade/vim-gitgutter
+[submodule "vim-markdown"]
+  path = vim/bundle/vim-markdown
+  url = https://github.com/plasticboy/vim-markdown
+[submodule "vim-nodejs-complete"]
+  path = vim/bundle/vim-nodejs-complete
+  url = https://github.com/ahayman/vim-nodejs-complete
+[submodule "vim-tmux-navigator"]
+  path = vim/bundle/vim-tmux-navigator
+  url = https://github.com/christoomey/vim-tmux-navigator
+[submodule "vimagit"]
+  path = vim/bundle/vimagit
+  url = https://github.com/jreybert/vimagit
+[submodule "vimux"]
+  path = vim/bundle/vimux
+  url = https://github.com/benmills/vimux
+[submodule "vim/plugins/vim-pathogen"]
+	path = vim/plugins/vim-pathogen
+	url = https://github.com/tpope/vim-pathogen.git
+[submodule "zprezto"]
+	path = zprezto
+	url = https://github.com/sorin-ionescu/prezto.git
+[submodule "vim/bundle/ctrlp"]
+	path = vim/bundle/ctrlp
+	url = https://github.com/ctrlpvim/ctrlp.vim.git
+[submodule "vim/bundle/vim-fugitive"]
+	path = vim/bundle/vim-fugitive
+	url = https://github.com/tpope/vim-fugitive.git
+[submodule "zsh/modules/zsh-completions"]
+	path = zsh/modules/zsh-completions
+	url = https://github.com/zsh-users/zsh-completions.git
+[submodule "zsh/modules/zsh-history-substring-search"]
+	path = zsh/modules/zsh-history-substring-search
+	url = https://github.com/zsh-users/zsh-history-substring-search.git
+[submodule "zsh/zsh-history-substring-search"]
+	path = zsh/zsh-history-substring-search
+	url = https://github.com/zsh-users/zsh-history-substring-search.git
+[submodule "zsh/zsh-completions"]
+	path = zsh/zsh-completions
+	url = https://github.com/zsh-users/zsh-completions.git
+[submodule "zsh/zsh-syntax-highlighting"]
+	path = zsh/zsh-syntax-highlighting
+	url = https://github.com/zsh-users/zsh-syntax-highlighting.git

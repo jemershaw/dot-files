@@ -1,0 +1,25 @@
+#!/bin/bash
+
+cd "$(dirname "$0")"
+shopt -s extglob
+
+base_dir=$(git rev-parse --show-toplevel)
+
+for sourcefile in !(README.md|os|install)
+do
+  dotfile=~/.${sourcefile}
+  sourcefile=${base_dir}/${sourcefile}
+  echo "Mapping $dotfile to $sourcefile"
+  if [ -L "${dotfile}" ] || ! [ -f "${dotfile}" ]
+  then
+    rm -f "${dotfile}"
+    ln -s "${sourcefile}" "${dotfile}"
+  else
+    echo "${dotfile} exists"
+  fi
+done
+
+if [ "$(uname -s)" == "Darwin" ];then
+  echo "Running Package install for osx"
+  os/osx_packages.sh
+fi
