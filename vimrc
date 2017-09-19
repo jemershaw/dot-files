@@ -98,6 +98,9 @@ vnoremap <leader>gb :Gblame<CR>
 map <Leader>vp :VimuxPromptCommand<CR>
 map <Leader>vm :VimuxPromptCommand("make ")<CR>
 
+" Plugin: YCM
+let g:ycm_filetype_blacklist = {}
+
 " Plugin: ctrlp
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'

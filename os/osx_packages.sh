@@ -36,8 +36,14 @@ packages=(
 "go"
 "htop"
 "cmake"
-"weechat"
+"weechat --with-perl --with-python --with-aspell --with-curl"
 "vim"
+"docker"
+"docker-compose"
+"aspell"
+"gist"
+"openssl"
+"htop"
 )
 packages_installed=$(brew list)
 
