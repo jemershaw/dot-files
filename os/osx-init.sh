@@ -112,5 +112,13 @@ defaults write NSGlobalDomain NSAutomaticWindowAnimationsEnable -bool false
 # make keyboard react faster
 defaults write NSGlobalDomain KeyRepeat -int 0
 
+# Remove the auto-hiding Dock delay
+defaults write com.apple.dock autohide-delay -float 0
+# Remove the animation when hiding/showing the Dock
+defaults write com.apple.dock autohide-time-modifier -float 0
+
+# Automatically hide and show the Dock
+defaults write com.apple.dock autohide -bool true
+
 killall Dock;
 killall Finder;
