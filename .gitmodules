@@ -75,4 +75,7 @@
 	url = https://github.com/zsh-users/zsh-syntax-highlighting.git
 [submodule "vim/bundle/vim-jinja"]
 	path = vim/bundle/vim-jinja
-	url = https://github.com/lepture/vim-jinja.git
+  url = https://github.com/lepture/vim-jinja.git
+[submodule "vim/bundle/vim-livedown"]
+	path = vim/bundle/vim-livedown
+  url = https://github.com/shime/vim-livedown
