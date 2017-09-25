@@ -3,6 +3,35 @@
 cd "$(dirname "$0")"
 shopt -s extglob
 
+if [ "$(uname -s)" == "Darwin" ];then
+  echo "Running Package install for osx"
+
+  # Xcode needs to be install for OSX
+  if [ "$(uname -s)" == "Darwin" ] && ! xcode-select -p > /dev/null
+  then
+    echo "Installing xCode, this is required for osx"
+    xcode-select --install
+    read -n 1 -s -r -p "Press any key to continue when install completed"
+  else
+    echo "xCode is installed, nothing to do here"
+  fi
+
+  # Install homebrew 
+  if [ -f "/usr/local/bin/brew" ]
+  then
+    echo "Homebrew is installed, nothing to do here"
+  else
+    echo "Homebrew is not installed, installing now"
+    echo "This may take a while"
+    echo "Homebrew requires osx command lines tools, please download xcode first"
+    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  fi
+  brew install git
+fi
+
+git clone git://github.com/jemershaw/dot-files $HOME/dot-files
+cd $HOME/dot-files
+
 base_dir=$(git rev-parse --show-toplevel)
 
 for sourcefile in !(README.md|os|install)
@@ -20,6 +49,6 @@ do
 done
 
 if [ "$(uname -s)" == "Darwin" ];then
-  echo "Running Package install for osx"
+  #Install OSX packages
   os/osx_packages.sh
 fi

@@ -6,8 +6,11 @@ defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
 # enable text replacement shortcuts in all apps
 defaults write -g WebAutomaticTextReplacementEnabled -bool true
 
+# disable transparency
+defaults write com.apple.universalaccess reduceTransparency -bool true
+
 # move dock to left and minimize with scale
-defaults write com.apple.dock orientation -string left
+defaults write com.apple.dock orientation -string bottom 
 defaults write com.apple.dock mineffect -string scale
 
 # use normal scroll direction
@@ -94,7 +97,7 @@ defaults write com.apple.DiskUtility DUDebugMenuEnabled -bool true
 defaults write com.apple.DiskUtility advanced-image-options -bool true
 
 # default to list view in Finder windows (others: `icnv`, `clmv`, `Flwv`)
-defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"
+defaults write com.apple.finder FXPreferredViewStyle -string "clmv"
 
 # Enable snap-to-grid for icons on the desktop and in other icon views
 /usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
@@ -102,6 +105,12 @@ defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"
 
 # disable local time machine backups
 sudo tmutil disablelocal
+
+# Disable animations
+defaults write NSGlobalDomain NSAutomaticWindowAnimationsEnable -bool false
+
+# make keyboard react faster
+defaults write NSGlobalDomain KeyRepeat -int 0
 
 killall Dock;
 killall Finder;

@@ -1,32 +1,11 @@
 #!/bin/bash
 
-# Xcode needs to be install for OSX
-if [ "$(uname -s)" == "Darwin" ] && ! xcode-select -p > /dev/null
-then
-  echo "Installing xCode, this is required for osx"
-  xcode-select --install
-  read -n 1 -s -r -p "Press any key to continue when install completed"
-else
-  echo "xCode is installed, nothing to do here"
-fi
-
-# Install homebrew 
-if [ -f "/usr/local/bin/brew" ]
-then
-  echo "Homebrew is installed, nothing to do here"
-else
-  echo "Homebrew is not installed, installing now"
-  echo "This may take a while"
-  echo "Homebrew requires osx command lines tools, please download xcode first"
-  ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-fi
-
 packages=(
 "zsh"
-"git"
-"node"
+"vim"
 "tmux"
 "mtr"
+"node"
 "whatmask"
 "docker"
 "docker-compose"
@@ -37,7 +16,6 @@ packages=(
 "htop"
 "cmake"
 "weechat --with-perl --with-python --with-aspell --with-curl"
-"vim"
 "docker"
 "docker-compose"
 "aspell"
@@ -61,7 +39,7 @@ done
 
 caskpackages=(
 "spectacle"
-"iterm2-nightly"
+"iterm2"
 "alfred"
 "openzfs"
 "omnigraffle"
