@@ -79,3 +79,9 @@
 [submodule "vim/bundle/vim-livedown"]
 	path = vim/bundle/vim-livedown
   url = https://github.com/shime/vim-livedown
+[submodule "vim/bundle/vim-gist"]
+	path = vim/bundle/vim-gist
+	url = https://github.com/kballard/gist-vim.git
+[submodule "vim/bundle/vim-webapi"]
+	path = vim/bundle/vim-webapi
+	url = https://github.com/mattn/webapi-vim.git
