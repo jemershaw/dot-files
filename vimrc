@@ -3,6 +3,12 @@
 "-- Support Local Enviroment --
 
 "-- Plugin: Pathogen --
+let g:pathogen_disabled = []
+
+if v:version < '704'
+  call add(g:pathogen_disabled, 'YouCompleteMe')
+endif
+
 execute pathogen#infect()
 call pathogen#helptags()
 
@@ -16,6 +22,7 @@ filetype plugin indent on
 set noerrorbells
 set ruler
 set number
+set relativenumber
 set backspace=indent,eol,start
 set nocp
 set laststatus=2
@@ -121,3 +128,6 @@ func! MyCtrlPTag()
         \ }
   CtrlPBufTag
 endfunc
+
+" Clipboard fix for osx
+set clipboard=unnamed

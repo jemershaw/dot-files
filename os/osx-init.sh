@@ -1,5 +1,14 @@
 #!/bin/bash
 
+# Digital Clock
+defaults write com.apple.menuextra.clock IsAnalog -bool false
+
+# 24-Hour Time
+defaults write NSGlobalDomain AppleICUForce12HourTime -bool false
+
+# Show Day/Date in menu bar
+defaults write com.apple.menuextra.clock DateFormat -string "EEE MMM d  H:mm"
+
 # disable iphoto launch when connecting iphone/ipad
 defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
 
@@ -9,11 +18,11 @@ defaults write -g WebAutomaticTextReplacementEnabled -bool true
 # disable transparency
 defaults write com.apple.universalaccess reduceTransparency -bool true
 
-# move dock to left and minimize with scale
+# move dock to bottom and minimize with scale
 defaults write com.apple.dock orientation -string bottom 
 defaults write com.apple.dock mineffect -string scale
 
-# use normal scroll direction
+# use nix scroll direction
 defaults write NSGlobalDomain com.apple.swipescrolldirection -bool true
 
 # dont write .DS_Store files on network drives
@@ -27,8 +36,15 @@ defaults write com.apple.frameworks.diskimages skip-verify -bool true
 defaults write com.apple.frameworks.diskimages skip-verify-locked -bool true
 defaults write com.apple.frameworks.diskimages skip-verify-remote -bool true
 
+# Disable updates, because security is great!
+softwareupdate --schedule off
+defaults write com.apple.commerce AutoUpdate -bool FALSE
+defaults write com.apple.commerce AutoUpdateRestartRequired -bool FALSE
+defaults write com.apple.SoftwareUpdate AutomaticDownload -boolean FALSE
+defaults write com.apple.SoftwareUpdate AutomaticCheckEnabled -bool FALSE
+
 # check for updates daily
-defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
+# defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
 
 # use current folder as finder search scope
 defaults write com.apple.finder FXDefaultSearchScope -string "SCcf"
@@ -40,12 +56,20 @@ defaults write com.apple.finder ShowMountedServersOnDesktop -bool true
 defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true
 
 # map bottom right corner to right click
-defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadCornerSecondaryClick -int 2 &&
-defaults write com.apple.AppleMultitouchTrackpad TrackpadCornerSecondaryClick -int 2 &&
-defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRightClick -int 0 &&
-defaults write com.apple.AppleMultitouchTrackpad TrackpadRightClick -int 0 &&
-defaults -currentHost write NSGlobalDomain com.apple.trackpad.trackpadCornerClickBehavior -int 1 &&
-defaults -currentHost write NSGlobalDomain com.apple.trackpad.enableSecondaryClick -bool true
+# defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadCornerSecondaryClick -int 2 &&
+# defaults write com.apple.AppleMultitouchTrackpad TrackpadCornerSecondaryClick -int 2 &&
+# defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRightClick -int 0 &&
+# defaults write com.apple.AppleMultitouchTrackpad TrackpadRightClick -int 0 &&
+# defaults -currentHost write NSGlobalDomain com.apple.trackpad.trackpadCornerClickBehavior -int 1 &&
+# defaults -currentHost write NSGlobalDomain com.apple.trackpad.enableSecondaryClick -bool true
+
+# Enable tap to click. (Don't have to press down on the trackpad -- just tap it.)
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
+defaults write com.apple.AppleMultitouchTrackpad Clicking -bool true
+
+# Enable 3-finger drag. (Moving with 3 fingers in any window "chrome" moves the window.)
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerDrag -bool true
+defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerDrag -bool true
 
 # expand save panel by defalt
 defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
@@ -80,10 +104,10 @@ defaults write com.apple.finder ShowPathbar -bool false
 defaults write com.apple.dock no-bouncing -bool true
 
 # graphite buttons
-# defaults write NSGlobalDomain AppleAquaColorVariant -int 6
+defaults write NSGlobalDomain AppleAquaColorVariant -int 6
 
-# large sidebar icons
-defaults write NSGlobalDomain NSTableViewDefaultSizeMode -int 3
+# small sidebar icons
+defaults write NSGlobalDomain NSTableViewDefaultSizeMode -int 1
 
 # menu bar battery show percentage off
 defaults write com.apple.menuextra.battery ShowPercent -string "NO"
@@ -110,7 +134,7 @@ sudo tmutil disablelocal
 defaults write NSGlobalDomain NSAutomaticWindowAnimationsEnable -bool false
 
 # make keyboard react faster
-defaults write NSGlobalDomain KeyRepeat -int 0
+defaults write NSGlobalDomain KeyRepeat -int 1
 
 # Remove the auto-hiding Dock delay
 defaults write com.apple.dock autohide-delay -float 0
@@ -125,5 +149,23 @@ defaults write com.apple.dock autohide -bool true
 defaults write com.apple.finder NewWindowTarget -string "PfLo"
 defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}/"
 
+# No translucent menu bar
+defaults write NSGlobalDomain "AppleEnableMenuBarTransparency" -bool false
+
+# Ask for password imediately
+defaults write com.apple.screensaver askForPassword -bool true
+defaults write com.apple.screensaver askForPasswordDelay 0
+
+# Screen Saver: Computer Name
+defaults -currentHost write com.apple.screensaver moduleDict -dict moduleName -string "Computer Name" path -string "/System/Library/Frameworks/ScreenSaver.framework/Resources/Computer Name.saver" type -int 0
+
+# Hot corners -> bottom left -> start screen saver
+defaults write com.apple.dock "wvous-tr-corner" -int 5
+defaults write com.apple.dock "wvous-tr-modifier" -int 0
+
+
 killall Dock;
 killall Finder;
+killall SystemUIServer;
+killall cfprefsd;
+killall "System Preferences";

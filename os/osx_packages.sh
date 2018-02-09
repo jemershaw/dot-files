@@ -5,12 +5,10 @@ packages=(
 "vim"
 "tmux"
 "mtr"
-"node"
 "whatmask"
 "docker"
 "docker-compose"
 "nmap"
-"python"
 "ipmitool"
 "go"
 "htop"
@@ -26,6 +24,7 @@ packages=(
 packages_installed=$(brew list)
 
 # Installing brew packages
+IFS=$'\n'
 for package in ${packages[@]};
 do
   if [[ "${packages_installed[@]}" =~ "$package" ]]
@@ -50,18 +49,19 @@ caskpackages=(
 "zoomus"
 "vmware-fusion"
 "google-play-music-desktop-player"
-"firefoxnightly"
 "apache-directory-studio"
 )
 caskpackages_installed=$(brew cask list)
 
 # Installing cask packages
+IFS=$'\n'
 for package in ${caskpackages[@]};
 do
   if [[ "${caskpackages_installed[@]}" =~ "$package" ]]
   then
     echo "$package is installed, nothing to do here"
   else
+    echo "installing $package"
     brew cask install $package
   fi
 done

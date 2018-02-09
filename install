@@ -29,7 +29,7 @@ if [ "$(uname -s)" == "Darwin" ];then
   brew install git
 fi
 
-git clone git://github.com/jemershaw/dot-files $HOME/dot-files
+git clone git@github.com:jemershaw/dot-files $HOME/dot-files
 cd $HOME/dot-files
 
 base_dir=$(git rev-parse --show-toplevel)
