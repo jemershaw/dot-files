@@ -14,7 +14,7 @@ defaults write com.apple.dock orientation -string bottom
 defaults write com.apple.dock mineffect -string scale
 
 # use normal scroll direction
-defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false
+defaults write NSGlobalDomain com.apple.swipescrolldirection -bool true
 
 # dont write .DS_Store files on network drives
 defaults write com.apple.desktopservices DSDontWriteNetworkStores true
