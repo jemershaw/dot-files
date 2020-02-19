@@ -1,6 +1,10 @@
+[ -z "$PS1" ] && return
+
 if [[ -s ~/.zshrc.local ]]; then
   source ~/.zshrc.local
 fi
+
+export LANG=en_US.UTF-8
 
 # Source Prezto if ZSH has the correct version
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]] && [[ $ZSH_VERSION > 4.3.17 ]]; then
@@ -19,7 +23,7 @@ fi
 # Set my custom Theme
  autoload -Uz promptinit
   promptinit
-  prompt clint
+  prompt sorin
 
 # Set the manta settings
 if [ -f ~/Manta/default.manta ]; then
@@ -32,18 +36,7 @@ if [[ "$(uname -s)" == "Darwin" ]]; then
 fi
 
 #alias
-alias jirash='$HOME/workspace/jirash/bin/jirash'
 alias vi='vim'
-alias ws='cd ~/workspace'
-alias h='cd ~'
-alias atp='ansible-playbook -i tmp/hosts'
-alias app='ansible-playbook -i inventory/hosts'
-
-#Functions
-ews() {
-    cd ~/workspace/$1
-    vi
-}
 
 sharesession() {
   tmux -S /tmp/tmux-shared-$USERNAME-$RANDOM new -s shared
@@ -51,9 +44,7 @@ sharesession() {
 
 # Set Golang information
 export GOPATH=$HOME/go
-export GOROOT=/usr/local/opt/go/libexec
-export PATH=$PATH:$GOPATH/bin
-export PATH=$PATH:$GOROOT/bin
+export PATH=$HOME/.cargo/bin:/opt/local/go/bin:$PATH:$GOPATH/bin
 
 # Editor
 export EDITOR=vi
@@ -88,7 +79,7 @@ if [[ $ZSH_VERSION > 4.3 ]]; then
 		source ~/.zsh/zsh-history-substring-search/zsh-history-substring-search.zsh
 	fi
 	if [[ -f ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]]
-	then 
+	then
 		source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 	fi
 	if [[ -f ~/.zsh/zsh-completions/zsh-completions.plugin.zsh ]]

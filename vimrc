@@ -3,7 +3,7 @@
 "-- Support Local Enviroment --
 
 "-- Plugin: Pathogen --
-let g:pathogen_disabled = []
+let g:pathogen_disabled = ['YouCompleteMe']
 
 if v:version < '704'
   call add(g:pathogen_disabled, 'YouCompleteMe')
@@ -13,7 +13,7 @@ execute pathogen#infect()
 call pathogen#helptags()
 
 set nocompatible
-filetype off 
+filetype off
 
 filetype plugin indent on
 
@@ -28,13 +28,21 @@ set nocp
 set laststatus=2
 set encoding=utf-8
 set wrap
+set nohidden
 set textwidth=79
 set formatoptions=qrn1
+set incsearch
+set ignorecase
+set smartcase
+set hlsearch
+
 
 "-- turn on syntax highlighting --
 syntax on
 set nocursorcolumn
 set nocursorline
+
+set background=dark
 
 "-- dont save .netrwhist --
 let g:netrw_dirhistmax=0
@@ -57,17 +65,29 @@ set softtabstop=2
 set tabstop=2
 set expandtab
 
+"-- Misc --
+set esckeys
+set pastetoggle=<F10>
+inoremap <F5> <C-R>=strftime("%Y-%m-%d")<CR>
+nnoremap <TAB> >>
+nnoremap <S-Tab> <<
+vnoremap <TAB> >gv
+vnoremap <S-TAB> <gv
+inoremap <S-TAB> <C-d>
+nnoremap <esc><esc> :noh<return><esc>
+
 "-- Tabbed Editing --
 "Open a new (empty) tab by pressing CTRL-T. Prompts for name of file to edit
 map <C-T> :tabnew<CR>
 "Switch between tabs by pressing Shift-Tab
-map <S-Tab> gt
+"map <S-Tab> gt
 
 "-- Map Leader --
 let mapleader = ","
 
 "-- Plugin: NerdTree --
 map <C-\> :NERDTreeToggle<CR>
+let NERDTreeIgnore = ['\.retry']
 
 "-- Plugin: Map tmux_navigator to custom commands --
 let g:tmux_navigator_no_mappings = 1
@@ -75,6 +95,11 @@ nnoremap <silent> <C-h> :TmuxNavigateLeft<cr>
 nnoremap <silent> <C-j> :TmuxNavigateDown<cr>
 nnoremap <silent> <C-k> :TmuxNavigateUp<cr>
 nnoremap <silent> <C-l> :TmuxNavigateRight<cr>
+
+"-- Plugin: ctrlp configuration --
+let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git\|local'
+"-- https://github.com/kien/ctrlp.vim/issues/174
+let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 
 "-- Plugin: git gutter configuration --
 set updatetime=250
@@ -92,7 +117,7 @@ imap <C-_> <esc>gcci
 nmap <c-_> gcc
 vmap <c-_> gcc
 
-" Git Command 
+" Git Command
 map <c-S-a> <esc>:Gstatus<CR>
 " ==================== Fugitive ====================
 nnoremap <leader>ga :Git add %:p<CR><CR>
@@ -131,3 +156,72 @@ endfunc
 
 " Clipboard fix for osx
 set clipboard=unnamed
+
+scriptencoding utf-8
+set encoding=utf-8
+
+if has("autocmd")
+  " Jump to last position when reopening a file
+  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+
+  " I hate trailing spaces
+  autocmd BufWritePre * :%s/\s\+$//e
+
+  " git-hub set GIT_HUB_MES
+  autocmd BufNewFile,BufRead GIT_HUB_EDIT_MSG set filetype=markdown
+
+  " set setting filetypes
+  autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+  autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags spell textwidth=80
+  autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS sw=4 sts=4 et
+  autocmd FileType python setlocal omnifunc=pythoncomplete#Complete sw=4 sts=4 et
+  autocmd FileType yaml setlocal omnifunc=pythoncomplete#Complete sw=2 sts=2 et
+  autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+  autocmd BufNewFile,BufRead * if match(getline(1),"---") >= 0 | set filetype=yaml | endif
+  autocmd BufNewFile,BufRead *.sls set filetype=yaml
+  autocmd BufNewFile,BufRead *.rs set filetype=rust
+  " autocmd BufWritePost *.js call UpdateTags()
+  autocmd FileType mail setlocal spell spelllang=en textwidth=72 wrapmargin=0 wrap
+endif
+
+let g:gist_post_private = 1
+
+" should markdown preview get shown automatically upon opening markdown buffer
+let g:livedown_autorun = 0
+
+" should the browser window pop-up upon previewing
+let g:livedown_open = 1
+
+" the port on which Livedown server will run
+let g:livedown_port = 1337
+
+" Function to source only if file exists {
+function! SourceIfExists(file)
+  if filereadable(expand(a:file))
+    exe 'source' a:file
+  endif
+endfunction
+" }
+call SourceIfExists("~/.vimrc.local")
+
+function! DelTagOfFile(file)
+  let fullpath = a:file
+  let cwd = getcwd()
+  let tagfilename = cwd . "/tags"
+  let f = substitute(fullpath, cwd . "/", "", "")
+  let f = escape(f, './')
+  let cmd = 'sed -i "/' . f . '/d" "' . tagfilename . '"'
+  let resp = system(cmd)
+endfunction
+function! UpdateTags()
+  let f = expand("%:p")
+  let cwd = getcwd()
+  let tagfilename = cwd . "/tags"
+  let cmd = 'ctags -a -f ' . tagfilename . ' --c++-kinds=+p --fields=+iaS --extra=+q ' . '"' . f . '"'
+  call DelTagOfFile(f)
+  let resp = system(cmd)
+endfunction
+
+
+" Ctags
+set tags=./tags;,tags;
